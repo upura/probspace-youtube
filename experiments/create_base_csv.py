@@ -1,6 +1,7 @@
+import numpy as np
 import pandas as pd
 
-from ayniy.preprocessing import datatime_parser
+from ayniy.preprocessing import datatime_parser, circle_encoding
 
 
 def change_to_Date(train, test, input_column_name, output_column_name):
@@ -29,6 +30,17 @@ if __name__ == '__main__':
         diff.seconds // 60 for diff in (pd.to_datetime(test['collection_date']) - pd.to_datetime(test['publishedAt']))
     ]
 
+    train, test = circle_encoding(train, test, col_definition={'encode_col': [
+        'publishedAt_month',
+        'publishedAt_day',
+        'publishedAt_dow',
+        'publishedAt_hour',
+        'publishedAt_minute',
+        'collection_date_month',
+        'collection_date_day',
+        'collection_date_dow'
+    ]})
+
     train.drop(['publishedAt',
                 'collection_date',
                 'collection_date_hour',
@@ -40,6 +52,26 @@ if __name__ == '__main__':
                'collection_date_minute',
                'thumbnail_link'], axis=1, inplace=True)
 
-    print(train.shape)  # (19720, 25)
+    train['y'] = np.log(train['y'])
+
     train.to_csv('../input/train_data_convert.csv', index=False)
     test.to_csv('../input/test_data_convert.csv', index=False)
+    print(train.shape)      # (19720, 41)
+    print(train.columns)
+    """
+    Index(['id', 'video_id', 'title', 'channelId', 'channelTitle', 'categoryId',
+       'tags', 'likes', 'dislikes', 'comment_count', 'comments_disabled',
+       'ratings_disabled', 'description', 'y', 'publishedAt_year',
+       'publishedAt_month', 'publishedAt_day', 'publishedAt_dow',
+       'publishedAt_hour', 'publishedAt_minute', 'collection_date_year',
+       'collection_date_month', 'collection_date_day', 'collection_date_dow',
+       'collection_date_minus_publishedAt', 'publishedAt_month_cos',
+       'publishedAt_month_sin', 'publishedAt_day_cos', 'publishedAt_day_sin',
+       'publishedAt_dow_cos', 'publishedAt_dow_sin', 'publishedAt_hour_cos',
+       'publishedAt_hour_sin', 'publishedAt_minute_cos',
+       'publishedAt_minute_sin', 'collection_date_month_cos',
+       'collection_date_month_sin', 'collection_date_day_cos',
+       'collection_date_day_sin', 'collection_date_dow_cos',
+       'collection_date_dow_sin'],
+      dtype='object')
+    """
