@@ -1,0 +1,7 @@
+git+https://github.com/stanfordmlgroup/ngboost.git
+ginza
+japanize-matplotlib
+kaggler
+mecab-python3
+mlflow
+neologdn
