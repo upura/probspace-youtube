@@ -66,32 +66,32 @@ preprocessing:
     groupby_dict: [
       {
         'key': ['ratings_disabled'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
       {
         'key': ['channelId'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
       {
         'key': ['categoryId'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
       {
         'key': ['ratings_disabled', 'channelId'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
       {
         'key': ['categoryId', 'ratings_disabled'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
       {
         'key': ['ratings_disabled', 'channelId', 'categoryId'],
-        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes'],
         'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
       },
     ]
@@ -117,3 +117,4 @@ preprocessing:
   numeric_interact: numerical_col
   get_tfidf: {'n_components': 5, 'lang': 'ja'}
   get_count: {'n_components': 5, 'lang': 'ja'}
+  get_text_len:
