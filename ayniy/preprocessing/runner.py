@@ -74,16 +74,16 @@ class Tabular:
                      'target_col': self.cols_definition['target_col']},
                     {'cv': self.cv})
 
+        if 'numeric_interact' in self.preprocessing.keys():
+            with timer('numeric_interact'):
+                self.train, self.test = numeric_interact(self.train, self.test, {'encode_col': self.cols_definition['numerical_col']})
+
         if 'aggregation' in self.preprocessing.keys():
             with timer('aggregation'):
                 self.train, self.test = aggregation(
                     self.train, self.test,
                     {'groupby_dict': self.preprocessing['aggregation']['groupby_dict'],
                      'nunique_dict': self.preprocessing['aggregation']['nunique_dict']})
-
-        if 'numeric_interact' in self.preprocessing.keys():
-            with timer('numeric_interact'):
-                self.train, self.test = numeric_interact(self.train, self.test, {'encode_col': self.cols_definition['numerical_col']})
 
         if 'standerize' in self.preprocessing.keys():
             with timer('standerize'):
