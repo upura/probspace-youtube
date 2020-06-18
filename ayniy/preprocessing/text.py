@@ -139,7 +139,7 @@ def text_normalize(train: pd.DataFrame, col_definition: dict):
     """
     col_definition: text_col
     """
-    train[col_definition['text_col']] = train[col_definition['text_col']].apply(neologdn.normalize)
+    train[col_definition['text_col']] = train[col_definition['text_col']].fillna('').apply(neologdn.normalize)
     return train
 
 
