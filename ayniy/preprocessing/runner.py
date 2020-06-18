@@ -117,6 +117,12 @@ class Tabular:
                                                      {'text_col': tc},
                                                      self.preprocessing['get_bert'])
 
+        if 'get_text_len' in self.preprocessing.keys():
+            with timer('get_text_len'):
+                for tc in self.cols_definition['text_col']:
+                    self.train[f'len_{tc}'] = [len(d) for d in self.train[tc]]
+                    self.test[f'len_{tc}'] = [len(d) for d in self.test[tc]]
+
         with timer('replace inf'):
             self.train = self.train.replace(np.inf, 9999999999).replace(-np.inf, -9999999999)
             self.test = self.test.replace(np.inf, 9999999999).replace(-np.inf, -9999999999)
