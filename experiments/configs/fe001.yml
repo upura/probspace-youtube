@@ -107,13 +107,6 @@ preprocessing:
         'agg': ['nunique']
       },
     ]
-  target_encoding: [
-    'video_id',
-    'channelId',
-    'categoryId',
-    'comments_disabled',
-    'ratings_disabled',
-  ]
   numeric_interact: numerical_col
   get_tfidf: {'n_components': 5, 'lang': 'ja'}
   get_count: {'n_components': 5, 'lang': 'ja'}
