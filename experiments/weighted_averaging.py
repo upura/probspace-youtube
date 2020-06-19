@@ -46,8 +46,10 @@ def make_submission(pred, run_name: str):
 
 
 run_ids = [
-    'run000',
-    'run001',
+    'run005',
+    'run006',
+    'run008',
+    'run010',
 ]
 run_name = 'weight000'
 
