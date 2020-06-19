@@ -52,7 +52,7 @@ if __name__ == '__main__':
                'collection_date_minute',
                'thumbnail_link'], axis=1, inplace=True)
 
-    train['y'] = np.log(train['y'])
+    train['y'] = np.log1p(train['y'])
 
     train.to_csv('../input/train_data_convert.csv', index=False)
     test.to_csv('../input/test_data_convert.csv', index=False)

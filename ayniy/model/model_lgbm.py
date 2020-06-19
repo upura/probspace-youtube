@@ -6,16 +6,9 @@ import numpy as np
 import optuna.integration.lightgbm as optuna_lgb
 import pandas as pd
 from scipy.misc import derivative
-from sklearn.metrics import mean_squared_log_error
 
 from ayniy.model.model import Model
 from ayniy.utils import Data
-
-
-def rmsle(preds, data):
-    y_true = data.get_label()
-    score = np.sqrt(mean_squared_log_error(y_true, np.clip(preds, 0, max(preds))))
-    return 'rmsle', score, False
 
 
 class ModelLGBM(Model):
@@ -39,15 +32,13 @@ class ModelLGBM(Model):
                 params, lgb_train, num_round,
                 valid_sets=[lgb_train, lgb_eval],
                 verbose_eval=500,
-                early_stopping_rounds=early_stopping_rounds,
-                feval=rmsle
+                early_stopping_rounds=early_stopping_rounds
             )
         else:
             self.model = lgb.train(
                 params, lgb_train, num_round,
                 valid_sets=[lgb_train],
-                verbose_eval=500,
-                feval=rmsle
+                verbose_eval=500
             )
 
     def predict(self, te_x):

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.optimize import minimize
 from scipy.stats import rankdata
-from sklearn.metrics import mean_squared_log_error
+from sklearn.metrics import mean_squared_error
 
 from ayniy.utils import Data
 
@@ -23,7 +23,7 @@ def f(x):
             pred += d[0] * x[i]
         else:
             pred += d[0] * (1 - sum(x))
-    score = np.sqrt(mean_squared_log_error(y_train, np.exp(np.clip(pred, 0, max(pred)))))
+    score = np.sqrt(mean_squared_error(y_train, np.clip(pred, 0, max(pred))))
     Data.dump(pred, f'../output/pred/{run_name}-train.pkl')
     return score
 
@@ -41,8 +41,7 @@ def make_predictions(data: list, weights: list):
 
 def make_submission(pred, run_name: str):
     sub = pd.read_csv('../input/sample_submission.csv')
-    sub['target'] = pred
-    print(np.exp(pred)[:10])
+    sub['target'] = np.expm1(pred)
     sub.to_csv(f'../output/submissions/submission_{run_name}.csv', index=False)
 
 
@@ -52,11 +51,11 @@ run_ids = [
 ]
 run_name = 'weight000'
 
-y_train = pd.read_csv('../input/train_data.csv')['y']
+y_train = Data.load('../input/y_train_fe000.pkl')
 data = [load_from_run_id(ri, to_rank=False) for ri in run_ids]
 
 for d in data:
-    print(np.sqrt(mean_squared_log_error(y_train, np.exp(np.clip(d[0], 0, max(d[0]))))))
+    print(np.sqrt(mean_squared_error(y_train, np.clip(d[0], 0, max(d[0])))))
 
 init_state = [round(1 / len(data), 3) for _ in range(len(data) - 1)]
 result = minimize(f, init_state, method='Nelder-Mead')
