@@ -45,7 +45,7 @@ cols_definition:
 model_name: 'ModelCatRegressor'
 params: {
   'depth': 6,
-  'learning_rate': 0.1,
+  'learning_rate': 0.04,
   'iterations': 10000,
   'loss_function': 'RMSE',
   'eval_metric': 'RMSE',
@@ -54,6 +54,6 @@ params: {
   'task_type': "CPU",
   'early_stopping_rounds': 50
 }
-evaluation_metric: 'rmsle'
+evaluation_metric: 'rmse'
 advanced:
   predict_exp:
