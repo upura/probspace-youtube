@@ -41,7 +41,7 @@ def make_predictions(data: list, weights: list):
 
 def make_submission(pred, run_name: str):
     sub = pd.read_csv('../input/sample_submission.csv')
-    sub['target'] = np.expm1(pred)
+    sub['y'] = np.expm1(pred)
     sub.to_csv(f'../output/submissions/submission_{run_name}.csv', index=False)
 
 
