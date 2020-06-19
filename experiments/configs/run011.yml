@@ -1,0 +1,64 @@
+description: LightGBM
+exp_name: 'probspace-youtube'
+run_name: 'run011'
+fe_name: 'fe001_top500'  # (19720, 500)
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  numerical_col: [
+    'comment_count',
+    'likes',
+    'dislikes',
+    'publishedAt_year',
+    'publishedAt_month',
+    'publishedAt_day',
+    'publishedAt_dow',
+    'publishedAt_hour',
+    'publishedAt_minute',
+    'collection_date_year',
+    'collection_date_month',
+    'collection_date_day',
+    'collection_date_dow',
+    'collection_date_minus_publishedAt'
+  ]
+  categorical_col: [
+    'channelId',
+    'categoryId',
+  ]
+  text_col: [
+    'title',
+    'channelTitle',
+    'description',
+  ]
+  delete_col: [
+    'id',
+    'title',
+    'channelTitle',
+    'description',
+    'tags',
+  ]
+  cv_y: 'ratings_disabled'
+model_name: 'ModelLGBM'
+params: {
+  'objective': 'regression',
+  'metric': 'rmse',
+  'num_leaves': 45,
+  'max_depth': 6,
+  "feature_fraction": 0.8,
+  'subsample_freq': 1,
+  "bagging_fraction": 0.7,
+  'min_data_in_leaf': 10,
+  'learning_rate': 0.01,
+  "boosting": "gbdt",
+  "lambda_l1": 0.4,
+  "lambda_l2": 0.4,
+  "verbosity": -1,
+  "random_state": 42,
+  "num_boost_round": 50000,
+  "early_stopping_rounds": 100
+}
+evaluation_metric: 'rmse'
+advanced:
+  predict_exp:
