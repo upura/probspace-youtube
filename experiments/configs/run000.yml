@@ -45,7 +45,7 @@ cols_definition:
 model_name: 'ModelLGBM'
 params: {
   'objective': 'regression',
-  'metric': 'None',
+  'metric': 'rmse',
   'num_leaves': 45,
   'max_depth': 6,
   "feature_fraction": 0.8,
@@ -61,6 +61,6 @@ params: {
   "num_boost_round": 50000,
   "early_stopping_rounds": 100
 }
-evaluation_metric: 'rmsle'
+evaluation_metric: 'rmse'
 advanced:
   predict_exp:
