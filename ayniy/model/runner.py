@@ -283,6 +283,10 @@ class Runner:
         # ここでは乱数を固定して毎回作成しているが、ファイルに保存する方法もある
         if 'cv_y' in self.cols_definition:
             train_data = pd.read_csv('../input/train_data.csv')
+            # adversarial validation
+            if self.advanced and 'adversarial_validation' in self.advanced:
+                test_data = pd.read_csv('../input/test_data.csv')
+                train_data = pd.concat([train_data, test_data], axis=0)
             return list(self.cv.split(self.X_train, train_data[self.cols_definition['cv_y']]))[i_fold]
         else:
             return list(self.cv.split(self.X_train, self.y_train))[i_fold]
