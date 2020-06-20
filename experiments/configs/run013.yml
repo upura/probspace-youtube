@@ -43,7 +43,7 @@ cols_definition:
 model_name: 'ModelCatRegressor'
 params: {
   'depth': 10,
-  'learning_rate': 0.01,
+  'learning_rate': 0.04,
   'iterations': 10000,
   'loss_function': 'RMSE',
   'eval_metric': 'RMSE',
