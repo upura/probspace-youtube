@@ -1,4 +1,5 @@
 git+https://github.com/stanfordmlgroup/ngboost.git
+catalyst==20.6.0
 ginza
 japanize-matplotlib
 kaggler
