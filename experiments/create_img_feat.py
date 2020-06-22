@@ -37,9 +37,9 @@ def get_features_from_loader(loader):
             x, _, _ = batch
         x = x.to(device)
         features = model(x)
-        train_img.append(features)
-    train_img = torch.cat(train_img)
-    train_img = train_img.detach().cpu().numpy()
+        train_img.append(features.detach().cpu().numpy())
+    train_img = np.concatenate(train_img, axis=0)
+    train_img = train_img
     return train_img
 
 
