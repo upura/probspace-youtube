@@ -28,6 +28,11 @@ class CustomRunner(Runner):
     @torch.no_grad()
     def predict_batch(self, batch):
         batch = self._batch2device(batch, self.device)
-        x, _ = batch
+        if len(batch) == 2:
+            x, _ = batch
+        elif len(batch) == 3:
+            x, y, _ = batch
+        else:
+            raise RuntimeError
         pred = self.model(x)
         return pred
