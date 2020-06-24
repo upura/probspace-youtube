@@ -289,7 +289,7 @@ class Runner:
                 train_data = pd.concat([train_data, test_data], axis=0)
             return list(self.cv.split(self.X_train, train_data[self.cols_definition['cv_y']]))[i_fold]
         else:
-            return list(self.cv.split(self.X_train, self.y_train))[i_fold]
+            return list(self.cv.split(self.X_train, self.y_train // 10))[i_fold]
 
     def submission(self):
         pred = Data.load(f'../output/pred/{self.run_name}-test.pkl')
