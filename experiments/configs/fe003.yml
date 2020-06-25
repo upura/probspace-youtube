@@ -1,0 +1,112 @@
+fe_name: 'fe003'
+data:
+  train: '../input/train_data_base.csv'
+  test: '../input/test_data_base.csv'
+  output_dir: '../input'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  numerical_col: [
+    # 'comment_count',
+    # 'likes',
+    # 'dislikes',
+    # 'publishedAt_year',
+    # 'publishedAt_month',
+    # 'publishedAt_day',
+    # 'publishedAt_dow',
+    # 'publishedAt_hour',
+    # 'publishedAt_minute',
+    # 'collection_date_year',
+    # 'collection_date_month',
+    # 'collection_date_day',
+    # 'collection_date_dow',
+    # 'collection_date_minus_publishedAt',
+    # 'publishedAt_month_cos', 'publishedAt_month_sin',
+    # 'publishedAt_day_cos', 'publishedAt_day_sin',
+    # 'publishedAt_dow_cos', 'publishedAt_dow_sin',
+    # 'publishedAt_hour_cos', 'publishedAt_hour_sin',
+    # 'publishedAt_minute_cos', 'publishedAt_minute_sin',
+    # 'collection_date_month_cos', 'collection_date_month_sin',
+    # 'collection_date_day_cos', 'collection_date_day_sin',
+    # 'collection_date_dow_cos', 'collection_date_dow_sin',
+  ]
+  categorical_col: [
+    'video_id',
+    'channelId',
+    'categoryId',
+    'comments_disabled',
+    'ratings_disabled',
+  ]
+  text_col: [
+    'title',
+    'channelTitle',
+    'description',
+  ]
+  delete_col: [
+    'id',
+    'title',
+    'channelTitle',
+    'description',
+    'tags',
+  ]
+preprocessing:
+  count_null: categorical_col
+  label_encoding: categorical_col
+  frequency_encoding: categorical_col
+  count_encoding: categorical_col
+  count_encoding_interact: categorical_col
+  matrix_factorization: [
+    'video_id',
+    'channelId',
+    'categoryId',
+    'comments_disabled',
+    'ratings_disabled',
+  ]
+  aggregation:
+    groupby_dict: [
+      {
+        'key': ['ratings_disabled'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+      {
+        'key': ['channelId'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+      {
+        'key': ['categoryId'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+      {
+        'key': ['ratings_disabled', 'channelId'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+      {
+        'key': ['categoryId', 'ratings_disabled'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+      {
+        'key': ['ratings_disabled', 'channelId', 'categoryId'],
+        'var': ['comment_count', 'likes', 'dislikes', 'publishedAt_year', 'likes_mul_dislikes', 'eval_count'],
+        'agg': ['mean', 'sum', 'median', 'min', 'max', 'var', 'std']
+      },
+    ]
+    nunique_dict: [
+      {
+        'key': ['ratings_disabled'],
+        'var': ['channelId'],
+        'agg': ['nunique']
+      },
+      {
+        'key': ['ratings_disabled'],
+        'var': ['categoryId'],
+        'agg': ['nunique']
+      },
+    ]
+  get_tfidf: {'n_components': 5, 'lang': 'ja'}
+  get_count: {'n_components': 5, 'lang': 'ja'}
+  get_text_len:

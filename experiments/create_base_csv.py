@@ -83,6 +83,7 @@ if __name__ == '__main__':
     train['tag_num'].fillna(0, inplace=True)
     test['tag_num'].fillna(0, inplace=True)
 
+    train["likes_mul_dislikes"] = train['likes'] * train['dislikes']
     train["eval_count"] = train['likes'] + train['dislikes']
     train["likes_ratio"] = train['likes'] / train["eval_count"]
     train["dislikes_ratio"] = train['dislikes'] / train["eval_count"]
@@ -145,7 +146,7 @@ if __name__ == '__main__':
 
     train.to_csv('../input/train_data_base.csv', index=False)
     test.to_csv('../input/test_data_base.csv', index=False)
-    print(train.shape)      # (19720, 64)
+    print(train.shape)      # (19720, 65)
     print(train.columns)
     """
     Index(['id', 'video_id', 'title', 'channelId', 'channelTitle', 'categoryId',
@@ -161,8 +162,9 @@ if __name__ == '__main__':
        'publishedAt_minute_sin', 'collection_date_month_cos',
        'collection_date_month_sin', 'collection_date_day_cos',
        'collection_date_day_sin', 'collection_date_dow_cos',
-       'collection_date_dow_sin', 'tag_num', 'eval_count', 'likes_ratio',
-       'dislikes_ratio', 'comment_count_mul_eval_count', 'title_ja_count',
+       'collection_date_dow_sin', 'tag_num', 'likes_mul_dislikes',
+       'eval_count', 'likes_ratio', 'dislikes_ratio',
+       'comment_count_mul_eval_count', 'title_ja_count',
        'channelTitle_ja_count', 'description_ja_count', 'title_ja_ratio',
        'channelTitle_ja_ratio', 'description_ja_ratio', 'title_en_count',
        'channelTitle_en_count', 'description_en_count', 'title_en_ratio',
