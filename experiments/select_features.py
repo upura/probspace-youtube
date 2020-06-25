@@ -13,10 +13,10 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--n')
 args = parser.parse_args()
 
-fe_id = 'fe001'
-run_id = 'run005'
+fe_id = 'fe003'
+run_id = 'run022'
 N_FEATURES = int(args.n)
-fe_name = f'fe001_top{N_FEATURES}'
+fe_name = f'{fe_id}_top{N_FEATURES}'
 
 X_train = Data.load(f'../input/X_train_{fe_id}.pkl')
 y_train = Data.load(f'../input/y_train_{fe_id}.pkl')
