@@ -1,0 +1,55 @@
+description: CatBoostRegressor
+exp_name: 'probspace-youtube'
+run_name: 'run029'
+fe_name: 'lain'  # (19720, 1467)
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  numerical_col: [
+    'comment_count',
+    'likes',
+    'dislikes',
+    'publishedAt_year',
+    'publishedAt_month',
+    'publishedAt_day',
+    'publishedAt_dow',
+    'publishedAt_hour',
+    'publishedAt_minute',
+    'collection_date_year',
+    'collection_date_month',
+    'collection_date_day',
+    'collection_date_dow',
+    'collection_date_minus_publishedAt'
+  ]
+  categorical_col: [
+  ]
+  text_col: [
+    'title',
+    'channelTitle',
+    'description',
+  ]
+  delete_col: [
+    'id',
+    'title',
+    'channelTitle',
+    'description',
+    'tags',
+  ]
+  cv_y: 'ratings_disabled'
+model_name: 'ModelCatRegressor'
+params: {
+  'depth': 10,
+  'learning_rate': 0.04,
+  'iterations': 10000,
+  'loss_function': 'RMSE',
+  'eval_metric': 'RMSE',
+  'random_seed': 777,
+  'allow_writing_files': False,
+  'task_type': "CPU",
+  'early_stopping_rounds': 50
+}
+evaluation_metric: 'rmse'
+advanced:
+  predict_exp:

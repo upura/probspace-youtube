@@ -1,0 +1,33 @@
+description: LightGBM
+exp_name: 'probspace-youtube'
+run_name: 'run028'
+fe_name: 'lain'  # (19720, 1467)
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  categorical_col: [
+  ]
+  cv_y: 'ratings_disabled'
+model_name: 'ModelLGBM'
+params: {
+  'objective': 'rmse',
+  # 'max_depth': 6,
+  'learning_rate': 0.01,
+  "boosting_type": "gbdt",
+  "metric": 'rmse',
+  'lambda_l1': 3.1601163039739164e-06,
+  'lambda_l2': 0.00029839724492614994,
+  'num_leaves': 26,
+  'feature_fraction': 0.6,
+  'bagging_fraction': 1.0,
+  'bagging_freq': 0,
+  'min_child_samples': 20,
+  'random_state': 0,
+  "num_boost_round": 50000,
+  "early_stopping_rounds": 100
+}
+evaluation_metric: 'rmse'
+advanced:
+  predict_exp:
