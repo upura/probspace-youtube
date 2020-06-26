@@ -12,6 +12,8 @@
 .vector_cache
 mlruns
 logdir*
+lain
+wandb
 
 # Created by https://www.gitignore.io/api/macos,images,python,jupyternotebooks
 # Edit at https://www.gitignore.io/?templates=macos,images,python,jupyternotebooks
