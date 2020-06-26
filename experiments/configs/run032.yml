@@ -1,0 +1,20 @@
+description: TabNetRegressor
+exp_name: 'probspace-youtube'
+run_name: 'run032'
+fe_name: 'fe003_top500'
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  categorical_col: [
+    'channelId',
+    'categoryId',
+  ]
+  cv_y: 'ratings_disabled'
+model_name: 'ModelTabNetRegressor'
+params: {
+}
+evaluation_metric: 'rmse'
+advanced:
+  predict_exp:

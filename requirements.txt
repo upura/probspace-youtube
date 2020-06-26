@@ -6,3 +6,4 @@ kaggler
 mecab-python3
 mlflow
 neologdn
+pytorch-tabnet
