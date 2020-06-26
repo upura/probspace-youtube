@@ -1,0 +1,23 @@
+description: TNNRegressor
+exp_name: 'probspace-youtube'
+run_name: 'run033'
+fe_name: 'fe003_top100'
+data:
+  sample_submission: '../input/sample_submission.csv'
+cols_definition:
+  id_col: 'id'
+  target_col: 'y'
+  categorical_col: [
+    'channelId',
+    'categoryId',
+  ]
+  cv_y: 'ratings_disabled'
+model_name: 'ModelTNNRegressor'
+params: {
+  'nb_epoch': 500,
+  'patience': 10,
+  'dropout': 0.4,
+}
+evaluation_metric: 'rmse'
+advanced:
+  predict_exp:
