@@ -60,6 +60,6 @@ for d in data:
 
 init_state = [round(1 / len(data), 3) for _ in range(len(data) - 1)]
 result = minimize(f, init_state, method='Nelder-Mead')
-print('optimized CV: ', -1 * result['fun'])
+print('optimized CV: ', result['fun'])
 print('w: ', result['x'])
 make_submission(make_predictions(data, result['x']), run_name)
